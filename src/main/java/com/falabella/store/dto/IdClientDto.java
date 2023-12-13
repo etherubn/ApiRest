@@ -6,8 +6,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
 public class IdClientDto {
-    @NotNull(message = "No debe ser nulo")
-    @Positive(message = "El id debe ser positivo")
+
     @Digits(integer = 100000,message = "Debe ser valor numérico", fraction = 0)
     private Long idClientDto;
 

@@ -41,9 +41,9 @@ public class ClientService {
     }
 
     //Edit
-    public MessageDto edit(Long id, ClientDto clientDto) {
+    public MessageDto edit(ClientDto clientDto,Long id) {
         Optional<Client> optionalClient = clientRepository.findById(id);
-        Client client ;
+        Client client;
 
         if (optionalClient.isPresent()){
             client = optionalClient.get();
@@ -51,6 +51,8 @@ public class ClientService {
             client.setEmail(clientDto.getEmail());
             client.setPhoneNumber(clientDto.getPhoneNumber());
             clientRepository.save(client);
+        }else {
+            throw new MiException("Cliente no encontrado");
         }
 
         return new MessageDto("Cliente modificado");
@@ -59,11 +61,10 @@ public class ClientService {
     public MessageDto delete(IdClientDto idClientDto) {
         Optional<Client> optionalClient = clientRepository.findById(idClientDto.getIdClientDto());
 
-        if (optionalClient==null){
-            throw new MiException("No se encontró el usuario para eliminar");
-        }
         if (optionalClient.isPresent()){
              clientRepository.delete(optionalClient.get());
+        }else {
+            throw new MiException("Cliente no encontrado");
         }
 
         return new MessageDto("Cliente eliminado");

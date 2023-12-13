@@ -23,7 +23,6 @@ public class ErrorHandler {
 
     @ExceptionHandler (MethodArgumentNotValidException.class)
     public ResponseEntity<List<ErrorDto>> argumentInvalid(MethodArgumentNotValidException ex){
-
         List<ErrorDto> errorsDto = ex.getBindingResult().getAllErrors().stream().map(error->{
             ErrorDto errorDto = new ErrorDto();
             errorDto.setStatusCode(401);
@@ -33,5 +32,7 @@ public class ErrorHandler {
 
         return new ResponseEntity<>(errorsDto,HttpStatus.BAD_REQUEST);
     }
+
+
 
 }

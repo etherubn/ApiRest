@@ -1,12 +1,10 @@
 package com.falabella.store.dto;
 
-import jakarta.validation.constraints.Digits;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 public class ClientDto {
 
+    private Long idClient;
     @Size(min = 3,message = "Debe tener como mínimo 3 caracteres")
     private String name;
     @Email(message = "Debe ingresar formato de correo")
@@ -17,12 +15,20 @@ public class ClientDto {
     public ClientDto() {
     }
 
-    public ClientDto( String name, String email, String phoneNumber) {
+    public ClientDto(Long idClient, String name, String email, String phoneNumber) {
+        this.idClient = idClient;
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
     }
 
+    public Long getIdClient() {
+        return idClient;
+    }
+
+    public void setIdClient(Long idClient) {
+        this.idClient = idClient;
+    }
 
     public String getName() {
         return name;

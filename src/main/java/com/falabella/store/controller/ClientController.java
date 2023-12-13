@@ -30,19 +30,17 @@ public class ClientController {
 
     @GetMapping("/clients")
     public ResponseEntity<List<ClientDto>> listClients(){
-        System.out.println("algo");
         return new ResponseEntity<>(clientService.listarClientes(),HttpStatus.OK);
     }
 
     @PutMapping("/editUser/{id}")
-    public ResponseEntity<MessageDto> editClient(@PathVariable Long id, @RequestBody ClientDto clientDto){
-        return new ResponseEntity<>(clientService.edit(id,clientDto),HttpStatus.OK);
+    public ResponseEntity<MessageDto> editClient(@RequestBody @Valid ClientDto clientDto,@PathVariable Long id){
+        return new ResponseEntity<>(clientService.edit(clientDto,id),HttpStatus.OK);
     }
 
     @DeleteMapping("/deleteUser/{id}")
-    public ResponseEntity<MessageDto> deleteClient(@PathVariable Long id){
+    public ResponseEntity<MessageDto> deleteClient(@PathVariable  Long id){
         IdClientDto idClientDto = new IdClientDto(id);
-
         return new ResponseEntity<>(clientService.delete(idClientDto),HttpStatus.OK);
     }
 }

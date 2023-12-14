@@ -1,9 +1,8 @@
 package com.falabella.store.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.Set;
 
 @Entity
 public class Product {
@@ -21,6 +20,9 @@ public class Product {
         this.name = name;
         this.price = price;
     }
+
+    @ManyToMany(mappedBy = "products")
+    private Set<Orden> orders;
 
     public Long getIdProduct() {
         return idProduct;
